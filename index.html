@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Did Not Reach Us — The First Nation-Farmer Climate Unity March</title>
+<style>
+  :root{
+    --earth:#5b4636; --earth-dark:#3e2f24; --sky:#e8eef2; --sage:#7a8b6f; --sage-dark:#55643f;
+    --gold:#c8963e; --paper:#faf6ef; --ink:#2b2620; --accent:#8a3324; --card:#fffdf8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif; background:var(--paper); color:var(--ink); line-height:1.65;}
+  header{background:linear-gradient(160deg,var(--earth-dark),var(--earth) 60%,#6e5a44); color:#f5efe4; padding:44px 20px 30px; text-align:center;}
+  header h1{font-size:clamp(1.6rem,4vw,2.6rem); letter-spacing:.5px;}
+  header .sub{font-style:italic; opacity:.9; margin-top:10px; font-size:clamp(.95rem,2vw,1.15rem);}
+  header .meta{margin-top:14px; font-size:.85rem; letter-spacing:2px; text-transform:uppercase; opacity:.75;}
+  /* route bar */
+  .routewrap{background:var(--earth-dark); padding:18px 10px 26px; position:sticky; top:0; z-index:50; box-shadow:0 3px 10px rgba(0,0,0,.3);}
+  .route{display:flex; max-width:1100px; margin:0 auto; position:relative; justify-content:space-between;}
+  .route::before{content:''; position:absolute; top:14px; left:3%; right:3%; height:4px; background:repeating-linear-gradient(90deg,var(--gold) 0 10px,transparent 10px 18px); border-radius:2px;}
+  .stop{position:relative; z-index:2; background:none; border:none; cursor:pointer; color:#ffffff; font-family:inherit; text-align:center; flex:1; padding:0 2px;}
+  .stop .dot{width:18px; height:18px; margin:5px auto 7px; border-radius:50%; background:#b9a486; border:3px solid var(--earth-dark); transition:all .25s;}
+  .stop .lbl{font-size:1rem; font-weight:700; line-height:1.25; display:block; text-shadow:0 1px 2px rgba(0,0,0,.6);}
+  .stop:hover .dot{background:var(--gold);}
+  .stop:hover .lbl{color:#ffd97a;}
+  .stop.active .dot{background:#ffd97a; transform:scale(1.4); box-shadow:0 0 12px #ffd97a;}
+  .stop.active{color:#ffd97a;}
+  .stop.active .lbl{font-size:1.05rem;}
+  .progress{max-width:1100px; margin:12px auto 0; color:#ffffff; font-size:1.05rem; text-align:center; letter-spacing:1px; font-weight:600;}
+  .progress b{color:#ffd97a; font-size:1.3rem;}
+  /* sections */
+  main{max-width:820px; margin:0 auto; padding:34px 22px 70px;}
+  section.day{display:none; animation:fade .5s;}
+  section.day.show{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+  .daytag{display:inline-block; background:var(--sage-dark); color:#fff; font-size:.75rem; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:14px;}
+  h2.daytitle{font-size:clamp(1.4rem,3.4vw,2rem); margin:12px 0 4px; color:var(--earth-dark);}
+  .dayinfo{font-style:italic; color:#6c6154; margin-bottom:18px;}
+  .day p{margin-bottom:14px;}
+  .quote{border-left:4px solid var(--gold); background:#f4ecdd; padding:14px 18px; margin:18px 0; font-style:italic;}
+  .quote .who{display:block; margin-top:8px; font-style:normal; font-weight:bold; font-size:.85rem; color:var(--earth);}
+  /* reached-us cards */
+  .reach{background:var(--card); border:1px solid #e0d4bd; border-left:6px solid var(--accent); border-radius:8px; padding:16px 18px; margin:20px 0; box-shadow:0 2px 6px rgba(60,40,20,.08);}
+  .reach .rlabel{font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); font-weight:bold;}
+  .reach h4{margin:6px 0 8px; color:var(--earth-dark); font-size:1.05rem;}
+  .reach p{margin-bottom:8px; font-size:.97rem;}
+  .reach p:last-child{margin-bottom:0;}
+  /* nav buttons */
+  .pager{display:flex; justify-content:space-between; margin-top:34px; gap:12px;}
+  .pager button{font-family:inherit; background:var(--earth); color:#f5efe4; border:none; padding:12px 20px; border-radius:6px; cursor:pointer; font-size:.95rem;}
+  .pager button:hover{background:var(--earth-dark);}
+  .pager button:disabled{opacity:.35; cursor:default;}
+  /* voices toggle */
+  .toolbar{max-width:820px; margin:18px auto 0; padding:0 22px; display:flex; gap:10px; flex-wrap:wrap;}
+  .toolbar button{font-family:inherit; border:2px solid var(--earth); background:#fff; color:var(--earth-dark); border-radius:20px; padding:9px 18px; cursor:pointer; font-size:1rem; font-weight:bold;}
+  .toolbar button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+  body.voicesOnly section.day.show p:not(.keep), body.voicesOnly section.day.show .quote:not(.native){display:none;}
+  .links{margin-top:24px; font-size:1.1rem; color:#3d342a; line-height:2;}
+  .links a{color:#1a4d8f; font-weight:bold; text-decoration:underline; text-underline-offset:3px;}
+  .links a:hover{color:#8a2f1f;}
+  .day a, .reach a, .quote a{color:#1a4d8f; font-weight:bold; text-decoration:underline; text-underline-offset:3px; font-size:1.05em;}
+  footer{background:var(--earth-dark); color:#f0e7d6; text-align:center; padding:28px 20px; font-size:1.05rem;}
+  footer a{color:#ffd97a; font-weight:bold; font-size:1.1rem; text-decoration:underline; text-underline-offset:3px;}
+  .weather{display:inline-block; font-size:.85rem; background:#dde7ee; color:#41586b; border-radius:14px; padding:3px 12px; margin-left:8px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>What Did Not Reach Us</h1>
+  <div class="sub">The First Nation-Farmer Climate Unity March, and the building of relationships</div>
+  <div class="meta">September 1–8, 2018 · Des Moines → Fort Dodge · 94 miles along the Dakota Access Pipeline</div>
+</header>
+
+<div class="routewrap">
+  <div class="route" id="route"></div>
+  <div class="progress" id="prog"></div>
+</div>
+
+<div class="toolbar">
+  <button id="voicesBtn" onclick="toggleVoices()">✦ Show only the moments that reached us</button>
+</div>
+
+<main id="main"></main>
+
+<footer>
+  Compiled from the writings of Jeff Kisling · Full archive: <a href="https://firstnationfarmer.com/" target="_blank">firstnationfarmer.com</a><br>
+  “We change the world one story at a time.” — Richard Wagamese
+</footer>
+
+<script>
+const DAYS = [
+{ id:'intro', short:'The Idea', title:'What Did Not Reach Us', tag:'Introduction', info:'Why thirty people walked 94 miles', miles:0, html:`
+<p>On its face, the First Nation-Farmer Climate Unity March was a simple thing: about thirty Native and non-native people walking from Des Moines to Fort Dodge along the route of the Dakota Access Pipeline, to call attention to a case before the Iowa Supreme Court about the abuse of eminent domain.</p>
+<p class="keep">But the deeper purpose was stated by Manape LaMere, one of the headsmen from Standing Rock: the March existed to make it possible for us to work together in the future. To do so, we needed to trust each other. To trust each other, we needed to understand each other. And to understand each other, we needed unhurried time — days of it — to share our stories.</p>
+<p>There is a whole world of truth that had not reached most white settlers on this land: the Indian residential schools and the trauma passed generation to generation like an open wound; the epidemic of missing and murdered Indigenous women; the theft of the land itself; a spirituality that recognizes the Spirit in trees, water, rocks, and wind. Our schools taught a sanitized history. Our news did not carry these stories.</p>
+<p class="keep">What did not reach us through books, media, and institutions began to reach us the only way it perhaps ever could: through growing relationships, walking side by side down empty Iowa gravel roads, often in the rain, sharing the physical struggle of ten to fifteen miles a day.</p>
+<div class="quote native">From the moment we are born to the time we continue on our spirit journey, we are involved in the creation of the story of our time here… When we take the time to share those stories with each other, we get bigger inside, we see each other, we recognize our kinship — we change the world one story at a time.<span class="who">— Richard Wagamese (Ojibwe, Wabeseemoong Independent Nations)</span></div>
+<p>Use the route above, the buttons below, or your keyboard arrows to walk the journey. The red-edged cards mark the moments when Native friends shared something with the rest of us — each one a truth reaching us at last.</p>
+<div class="links">Background: <a href="https://firstnationfarmer.com/2020/04/02/introduction/" target="_blank">Introduction</a> · <a href="https://firstnationfarmer.com/2020/04/03/the-path-to-walking-94-miles/" target="_blank">The Path to Walking 94 Miles</a> · <a href="https://youtu.be/aNUf5Fv8z5c" target="_blank">March promo video</a></div>`},
+
+{ id:'gather', short:'Aug 31', title:'Gathering at Union Park', tag:'The night before · Des Moines', info:'Friday, August 31 <span class="weather">⛈ overnight thunderstorm</span>', miles:0, html:`
+<p>Tents popped up on the hill near the shelter at Union Park. Most of us didn’t know each other. Tents set up in the wrong spot were carried, fully assembled, to the right one — everyone pitching in, building community in more ways than one.</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>“So that we could accomplish our sacred journey” — Manape LaMere</h4>
+<p>Because the previous year’s march had faced harassment — including gunshots — Manape LaMere, Alton Onefeather, and Lakasha Yooxot Likipt provided security. Reviewing the Code of Nonviolence, Manape told us they were keeping us safe <i>so that we could accomplish our sacred journey.</i></p>
+<p>We had signed up for a protest march. Before we walked a single mile, a Native man told us we were on a sacred journey. That reframing was the first gift, and it changed what the next eight days meant.</p></div>
+<p>Rain and thunder arrived at 3 a.m. and continued most of the night. My little two-man tent stayed dry, and once I trusted it, I enjoyed the storm. It looked like this was going to be an interesting week.</p>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/01/first-night/" target="_blank">First Night</a> · <a href="https://firstnationfarmer.com/2020/04/02/preparation/" target="_blank">Preparation</a> · <a href="https://firstnationfarmer.com/wp-content/uploads/2020/04/thunderstorm-1.mp3" target="_blank">🔊 the thunderstorm, recorded from the tent</a></div>`},
+
+{ id:'d1', short:'Day 1', title:'Des Moines → Ankeny', tag:'Day 1 · September 1 · 13.2 miles', info:'Press conference, blessings, heat index 90° <span class="weather">🌦 storms → heat</span>', miles:13.2, html:`
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Regina Tsosie’s song at the Iowa Utilities Board</h4>
+<p>Regina Tsosie (Sage Sisters of Solidarity; Native American Coalition of the Quad Cities) opened the press conference with a song — the first ceremony of the March. To the Des Moines Register she gave the two-part truth many of us were only beginning to grasp: <i>“It could lead to a potential break and poison our water. But it also has desecrated our sacred sites.”</i> The environmental harm we understood. The desecration of sacred sites was part of what had not reached us.</p></div>
+<p>At Birdland Park we circled up. Ako Abdul-Samad gave a blessing; Manape LaMere sang, his voice carrying over the swollen Des Moines River. Then we walked — into 90-degree heat index. A family in Ankeny invited us in for homemade cookies, the first of many acts of hospitality.</p>
+<p class="keep">As we walked, we naturally paired off. Short, tentative conversations grew longer and deeper. With twelve to twenty people marching, each of us eventually talked with every other person. As Matthew Lone Bear later put it: <b>“This is a great walk because people actually talk with each other.”</b></p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Regina at the Griffieon farm: two land thefts, one story</h4>
+<p>Our hosts Craig and LaVon Griffieon have fought the city of Ankeny’s attempts to take their farm for years. After they shared their story at the evening forum, Regina Tsosie embraced them — and drew the parallel between the taking of their farm and the theft of Native lands across the United States. The eminent domain case we marched for concerned farmland first taken from Native peoples. Recognition across the divide, on the very first night.</p></div>
+<p>Severe storms hit during the forum — a tornado sighted twenty miles away. Half of us slept in the machine shed; the rest rode out the worst tent-pounding rain any of us had seen. In the morning, Craig’s tractor carried the tipi poles to the gear truck: First Nation-Farmer Unity, in one image.</p>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/iowa-utilities-board-press-conference/" target="_blank">IUB press conference</a> · <a href="https://firstnationfarmer.com/2020/04/03/the-march-begins/" target="_blank">The March Begins</a> · <a href="https://firstnationfarmer.com/2020/04/03/first-nights-forum-at-the-griffieon-farm/" target="_blank">Griffieon forum</a> · <a href="https://youtu.be/IsG73fPI8d4" target="_blank">🎬 Regina sings</a></div>`},
+
+{ id:'d2', short:'Day 2', title:'Ankeny → Huxley', tag:'Day 2 · September 2 · 9.0 miles', info:'Flooded campsite, church sanctuary, farm forum <span class="weather">⛅ dry, creeks flooding</span>', miles:22.2, html:`
+<p>Slow start after the storm; French toast with strawberry-blueberry topping from Lyssa’s Veggie Thumper food truck. Creeks ran over their banks. I never thought I’d find myself thinking, “we’re <i>only</i> walking 9 miles today.”</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Matthew Lone Bear’s story about his mother</h4>
+<p>Walking together — he shooting video, I taking photos — I was led to tell Matthew that I knew about Quaker involvement in the Indian residential schools, and that I was sorry for what had happened. He nodded, and we kept walking. I said nothing more.</p>
+<p>A few hours later, he said he wanted to tell me a story. It involved a traumatic incident related to his mother and the residential schools. It was not absolution and it resolved nothing. It was a Native man deciding this white Quaker could be trusted to hear a piece of his family’s pain. A history available in books for decades finally reached me — as a story about someone’s mother, told by a friend on a gravel road.</p></div>
+<p>Our campsite in Huxley was underwater, so the Fjeldberg Lutheran Church offered us sanctuary. Sleeping bags scattered through the rooms, some co-ed — “I slept with ______ last night” jokes, and another layer of trust.</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Christine Nobiss on Native agriculture</h4>
+<p>At the evening forum, farmer Lee Tesdell described his bioreactor, cover crops, and prairie strips. Christine Nobiss (Sikowis) explained that Native agricultural practices are superior ways to grow food, especially for the soil and water. When a handout called ancient agriculture “simple,” Native marchers corrected it — many varieties of maize had been developed here 1,100 years ago. Ed Fallon asked the question that hung over the week: how do we convince more farmers to change?</p></div>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/day-2/" target="_blank">Day 2</a> · <a href="https://firstnationfarmer.com/2020/04/03/forum-on-agricultural-practices/" target="_blank">Forum on agricultural practices</a></div>`},
+
+{ id:'d3', short:'Day 3', title:'Huxley → Ames', tag:'Day 3 · September 3 · ~10 miles', info:'Smudging in the rain; the first pipeline crossings <span class="weather">🌧 heavy rain</span>', miles:32, html:`
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Trisha’s smudging</h4>
+<p>Before we set out in hard rain, Trisha Etringer (Ho-Chunk Nation of Nebraska) performed smudging for all of us — a Native practice offered to a mixed group of strangers-becoming-friends, to remove negative energy and bring positive energy. My feet actually felt better. Nobody suggested waiting out the rain. Not one person complained, that day or any day.</p></div>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Donnielle’s prayers at the pipeline</h4>
+<p>At the crossing outside Huxley, Donnielle Wanatee (Meskwaki) prayed for the walkers and for our families at home. The emotion caught me off guard. Kathy Byrnes wept, remembering the pipeline’s construction on her neighbor’s land; many offered hugs. Every crossing after was marked the same way — a circle, held hands, prayer over the buried steel. The ceremonies taught our bodies what our minds had only abstractly known: the trauma of the land and water desecrated by the black snake.</p></div>
+<p class="keep">A landowner among us told of harassment by pipeline land agents — her son harassed walking home from school, bright lights shone on her house at night. Miriam prayed at the second crossing. We stopped again at a pumping station.</p>
+<p>Donnielle and I stood together at a break. I reminded her of the van ride to Minneapolis in February. She remembered — she’d thought I had a kind face. Connections deepen each time we come together again. In Ames, the tipi rose again.</p>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/day-3-sept-3-2018/" target="_blank">Day 3</a> · <a href="https://youtu.be/kNc7lvkrKE8" target="_blank">🎬 Raising the tipi</a></div>`},
+
+{ id:'d4', short:'Day 4', title:'Ames → Boone', tag:'Day 4 · September 4 · 15.1 miles', info:'The longest day; “we are a tribe” <span class="weather">🌧 flash flood warnings</span>', miles:47.1, html:`
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>“We are a tribe” — Donnielle Wanatee</h4>
+<p>Four days in, on the longest mileage of the March, the group had become cohesive enough that Donnielle — a Meskwaki woman speaking of a group that had been mostly white strangers — said simply: <b>we are a tribe.</b></p></div>
+<p class="keep">Alton Onefeather talked about the bond between a child and an animal — the horse of his youth, the only one who came up to him every time. “I really miss that horse.” Small stories, freely given, are what turn categories into friends. We learned Alton and Foxy would marry two weeks after the March.</p>
+<p>Mahmud Fitil shared stories of tar sands spills — labs afraid to test the water, the Doon derailment’s 230,000 spilled gallons, a smell worse than gasoline. Farmers described topsoil mixed into clay, compaction of 300 psi, standing water over the trench. Years later, Iowa State research confirmed it: corn down 15%, soybeans down 25% over the disturbed ground.</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>“We call it Thanks-taking” — Manape LaMere</h4>
+<p>Dinner at the Boone County Fairgrounds was buffalo and fry bread. Looking around the table I thought: this would make a nice “real” Thanksgiving. Manape said, <b>we call it Thanks-taking.</b> One quiet word carrying the whole history the schoolbooks whitewashed. It lodged at that table and never left.</p></div>
+<p>We slept that night — all of us, for the first time — in one big room: the same fairgrounds building where the Utilities Board had taken public comments on the pipeline in 2015, where Peter Clay first met Native people fighting it.</p>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/day-4-ames-boone/" target="_blank">Day 4</a></div>`},
+
+{ id:'d5', short:'Day 5', title:'Boone → Pilot Mound', tag:'Day 5 · September 5 · 14 miles', info:'Blisters, a Quaker crossing, an elder’s blessing <span class="weather">🌧 hardest rain yet</span>', miles:61.1, html:`
+<p>Miriam Kashia — foot doctor extraordinaire — patched my blister with foam and duct tape. It rained harder than ever at the start; sage was carried to each of us; Alton made a raincoat for his dog Oceti.</p>
+<p class="keep">Being outside all day, I became aware — as Indigenous people have always been — that everything has the Spirit in it: trees, water, plants, rocks, wind. I found myself talking to the trees and squirrels and birds as I walked. No one taught it as a lesson. It seeped in from the company and the pace. You cannot learn it at highway speed.</p>
+<p>At the pipeline crossing before Pilot Mound, I was asked to lead the prayers — a chance for sharing to flow the other direction. Our circle held hands and worshiped in Quaker silence. Miriam had told someone earlier: “He’s a Quaker, and all Quakers are ministers.” Afterward came hugs. I had felt the Spirit among us all week.</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>“My heart soars like a hawk” — Frank LaMere</h4>
+<p>A car had been following us; the driver was Manape’s father, Frank LaMere, the longtime Winnebago activist, simply enjoying watching us march. Before dinner he told us watching us made his <b>heart soar like a hawk</b> — and gave us the long view: change takes forty years and more. <i>It is not the number of people involved that matters. It is their persistence in raising up the truth.</i> Medicine for the discouraged, delivered in person, in a town with no cell service.</p></div>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/day-5-boone-pilot-mound/" target="_blank">Day 5</a></div>`},
+
+{ id:'d6', short:'Day 6', title:'Pilot Mound → Dayton', tag:'Day 6 · September 6 · 9 miles', info:'The MMIW poster; hospitality in Dayton <span class="weather">🌤 clearing</span>', miles:70.1, html:`
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Foxy carries the Missing and Murdered Indigenous Women poster</h4>
+<p>Foxy Onefeather carried the large MMIW poster along the route. Every mile, drivers and townspeople who had likely never heard of the epidemic — much of its violence tied to pipeline man camps — saw those words and that artwork. She was doing for rural Iowa what the speakers in Minneapolis had done for me that February: carrying a truth to people it had never reached.</p></div>
+<p class="keep">Somewhere in these middle days, walking through Ames, Foxy had shared her own story with me — including that she had not experienced racism until she moved to the Midwest. I listened more closely than she realized. Her story would later teach me a second lesson about the responsibilities that come with being trusted with someone’s story.</p>
+<p>A March t-shirt hung in a shop window as we left Pilot Mound. The miles were getting easier, not harder, even on a blistered foot and backup shoes. In Dayton, the golf club beside our park offered internet and showers — and we finally had a night with no storms.</p>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/day-6-pilot-mount-dayton/" target="_blank">Day 6</a></div>`},
+
+{ id:'d7', short:'Day 7', title:'Dayton → Otho', tag:'Day 7 · September 7 · 11.7 miles', info:'Wild grapes, Mni Wiconi on a bridge, the bonfire <span class="weather">☀ cool and clear</span>', miles:81.8, html:`
+<p>A pleasant day on quiet roads — walking side by side, Ed Fallon playing his flute. A herd of cattle moved toward us as one, and stopped as one. On the bridge at the bottom of “suicide hill,” someone had written <b>Mni Wiconi — Water Is Life</b>. The words of Standing Rock, waiting for us in rural Iowa.</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>Wild grapes — Manape LaMere</h4>
+<p>Near the creek, Manape showed us wild grapes growing beside the road and crushed them so we could smell their fragrance. Thirty seconds of an eight-day walk: knowledge of the land, freely shared, teaching us to notice what was alive along a road we would otherwise have trudged past.</p></div>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>The bonfire: decolonization and sovereignty</h4>
+<p>On the last night of camping, around a fire beneath the whoosh of wind turbines, Trisha Etringer led a discussion of decolonization, and Manape spoke about sovereignty — of nations, and of yourself; how he concluded he should give up both his U.S. citizenship and his tribal membership to achieve his own sovereignty.</p>
+<p>These were not topics for day one. They required 160-some accumulated miles of trust, offered at the exact moment we could receive them. The deepest things reached us last, and around a fire.</p></div>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/day-7-dayton-otho/" target="_blank">Day 7</a> · <a href="https://youtu.be/oOAC_RkN5cY" target="_blank">🎬 Ed’s flute</a></div>`},
+
+{ id:'d8', short:'Day 8', title:'Otho → Fort Dodge', tag:'Final day · September 8 · 12.4 miles', info:'Cold dark start; celebration at City Square Park <span class="weather">🥶 cold morning</span>', miles:94.2, html:`
+<p>Up at 6 a.m., breaking camp in the dark, hot coffee, and a ceremony before walking: the money we had collected, in an envelope Fintan decorated, given to Alton and Foxy for their wedding. The community we had built was doing what communities do — celebrating a marriage from within its own ranks.</p>
+<p class="keep">All day, people talked about how sad they would be when the March was finished. A police escort brought us through downtown Fort Dodge to City Square Park, the tipi standing, a huge mural — painted all week — hung on the gear truck.</p>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>The Mni Wiconi Song — Lakasha Yooxot Likipt &amp; Akicita Hoksida</h4>
+<p>Drummers sang the Mni Wiconi Song in their own language. The Messenger printed the translation: <i>“Grandmother earth gives life. The water is sacred. The water that gives life is sacred. DAPL is very bad. The Nation needs to take heart and be brave.”</i></p></div>
+<div class="reach"><span class="rlabel">✦ It reached us</span><h4>“They came for us at Standing Rock” — Donnielle Wanatee</h4>
+<p>To the Messenger, Donnielle compressed the entire logic of the March into two sentences: <i>“This is a slippery slope. They came for us at Standing Rock. They’ll come for everybody if we don’t band together. We’re more aware of land being taken away. Now it’s happening to other peoples. You have to stand together.”</i></p></div>
+<p>The reporter found me on a bench, picking rocks out of my worn backup shoes and checking a duct-taped blister pad. I told him what I’d heard our leaders say: to work together we have to know each other; to trust each other we have to talk to each other. Matthew told him: “I got to meet a lot of great people. I hope people make a stand.” Miriam: “All injustice is connected… Protect our water. For all the species and the world.”</p>
+<div class="quote native">Two-eyed seeing recognizes the benefits of seeing from one eye with the strengths of Indigenous ways of knowing, from the other eye the strengths of the Western ways of knowing, and using both of these eyes together to create new forms of understanding and insight.<span class="who">— Elder Albert Marshall (Mi’kmaq, Eskasoni First Nation)</span></div>
+<div class="links"><a href="https://firstnationfarmer.com/2020/04/03/final-day-otho-fort-dodge/" target="_blank">Final Day</a> · <a href="https://youtu.be/PnuvThqsgbY" target="_blank">🎬 Christine Nobiss at the end</a> · <a href="https://youtu.be/JOVHDEtnh1k" target="_blank">🎬 Donnielle Wanatee at the end</a></div>`},
+
+{ id:'after', short:'After', title:'The Relationships Continue', tag:'September 12, 2018 → today', info:'The court, and everything the March made possible', miles:94.2, html:`
+<p>Four days after the March, many of us reassembled at the Iowa Supreme Court for the eminent domain arguments. The decision, months later, went against the landowners; the oil kept flowing. If the March had only been about the court case, it would be counted a failure. It was not only about the court case.</p>
+<p class="keep">That November, several of us — led by Christine Nobiss — met with Senator Grassley’s staff about Savanna’s Act and the SURVIVE Act, carrying the MMIW crisis Foxy had walked 94 miles with into a Senate office. Savanna’s Act and the Not Invisible Act passed in 2020; the 2022 Violence Against Women Act kept the tribal provisions. Persistence in raising up the truth, exactly as Frank LaMere said.</p>
+<p class="keep">In April 2019 the marchers reunited. Foxy told me what it was like to see her story written down — new to her, coming from oral tradition — graciously teaching me that stories entrusted to us are not ours to publish without asking. She and Alton sent their photos of the March to join the collection.</p>
+<p class="keep">A vigil for the Wet’suwet’en in 2020 brought Ronnie James, who mentored me into Des Moines Mutual Aid. Sikowis asked non-natives to learn and teach LANDBACK, so the LANDBACK Friends site was born. When CO2 pipeline companies came for Iowa farmland with the same eminent domain playbook, the March community was ready — at Summit Carbon’s door, back at the Utilities Board, and in a new coalition, the Buffalo Rebellion, whose precursor was this March. And in 2022, Iowa Conservative Friends put their peace and justice budget behind “They Found Us,” the documentary about the residential school at Sikowis’s own George Gordon First Nation — Quakers materially supporting Native people telling the truth about the schools Quakers helped run.</p>
+<div class="quote native">There is a collective emotional lift in doing something worthwhile for our peoples’ benefit… These spaces become intergenerational, diverse places of Indigenous joy, care and conversation.<span class="who">— Leanne Betasamosake Simpson, Rehearsals for Living</span></div>
+<p>Ninety-four miles of small steps. A song outside a government office. A nod, then a story about a mother. A word — Thanks-taking — over dinner. Wild grapes by the roadside. Sage smoke in the rain. A poster carried past ten thousand fenceposts. Prayers over a buried pipe. None of it could have happened at a rally or a hearing. It required the ancient technology of walking together. And through the relationships that hardship built, what did not reach us, reached us at last.</p>
+<div class="links"><a href="https://firstnationfarmer.com/next-steps-2/" target="_blank">Next Steps</a> · <a href="https://landbackfriends.com/" target="_blank">LANDBACK Friends</a> · <a href="https://quakersandreligioussocialism.com/" target="_blank">Quakers and Mutual Aid</a></div>`}
+];
+
+const route=document.getElementById('route'), main=document.getElementById('main');
+DAYS.forEach((d,i)=>{
+  const b=document.createElement('button'); b.className='stop'; b.innerHTML='<span class="dot"></span><span class="lbl">'+d.short+'</span>';
+  b.onclick=()=>go(i); route.appendChild(b);
+  const s=document.createElement('section'); s.className='day'; s.id='sec'+i;
+  s.innerHTML='<span class="daytag">'+d.tag+'</span><h2 class="daytitle">'+d.title+'</h2><div class="dayinfo">'+d.info+'</div>'+d.html+
+   '<div class="pager"><button id="prev'+i+'">← Back</button><button id="next'+i+'">'+(i<DAYS.length-1?'Walk on →':'Return to the start ↺')+'</button></div>';
+  main.appendChild(s);
+});
+let cur=0;
+function go(i){
+  cur=(i+DAYS.length)%DAYS.length;
+  document.querySelectorAll('.day').forEach((s,j)=>s.classList.toggle('show',j===cur));
+  document.querySelectorAll('.stop').forEach((s,j)=>s.classList.toggle('active',j===cur));
+  const m=DAYS[cur].miles;
+  document.getElementById('prog').innerHTML = m>0 ? '<b>'+m.toFixed(1)+'</b> of 94 miles walked' : 'Des Moines to Fort Dodge — the journey begins';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+DAYS.forEach((d,i)=>{
+  document.getElementById('prev'+i).onclick=()=>go(i-1);
+  document.getElementById('next'+i).onclick=()=>go(i+1);
+  if(i===0) document.getElementById('prev'+i).disabled=true;
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') go(cur+1);
+  if(e.key==='ArrowLeft') go(cur-1);
+});
+function toggleVoices(){
+  document.body.classList.toggle('voicesOnly');
+  document.getElementById('voicesBtn').classList.toggle('on');
+}
+go(0);
+</script>
+</body>
+</html>
